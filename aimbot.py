@@ -57,6 +57,7 @@ while True:
                 min = dist
                 at = i
 
+        # Pixel difference between crosshair(center) and the closest object
         x = centers[at][0] - img_w/2
         y = centers[at][1] - img_h/2 - (detected_boxes[at][3] - detected_boxes[at][2]) * 0.45
 
