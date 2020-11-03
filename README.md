@@ -1,4 +1,4 @@
-# CS_Aimbot
+# Tensorflow Hub Aimbot
 Simple Counter Strike Aimbot with Tensorflow_Hub
 
 
