@@ -1,0 +1,5 @@
+tensorflow
+tensorflow_hub
+numpy
+pywin32
+opencv-contrib-python
