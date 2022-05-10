@@ -7,18 +7,33 @@ import cv2
 import math
 import time
 
+from speedscreen import WindowCapture
+
 detector = hub.load("https://tfhub.dev/tensorflow/centernet/resnet50v1_fpn_512x512/1")
 size_scale = 3
 
 while True:
-    # Get rect of Window
-    hwnd = win32gui.FindWindow(None, 'Counter-Strike: Global Offensive')
-    #hwnd = win32gui.FindWindow("UnrealWindow", None) # Fortnite
-    rect = win32gui.GetWindowRect(hwnd)
-    region = rect[0], rect[1], rect[2] - rect[0], rect[3] - rect[1]
+    
+    '''
+    check windows name: 
+    
+    def winEnumHandler( hwnd, ctx ):
+        if win32gui.IsWindowVisible( hwnd ):
+        print (hex(hwnd), win32gui.GetWindowText( hwnd ))
 
+    win32gui.EnumWindows( winEnumHandler, None )
+    '''
+    # Get rect of Window
+    #hwnd = win32gui.FindWindow("UnrealWindow", None) # Fortnite
+    hwnd = WindowCapture('Counter-Strike: Global Offensive - Direct3D 9')
+    # rect = win32gui.GetWindowRect(hwnd)
+    # region = rect[0], rect[1], rect[2] - rect[0], rect[3] - rect[1]
+    def get_screen(hwnd):
+        src = hwnd.get_screenshot()
+        return src
     # Get image of screen
-    ori_img = np.array(pyautogui.screenshot(region=region))
+    scr = get_screen(hwnd)
+    ori_img = np.array(scr)
     ori_img = cv2.resize(ori_img, (ori_img.shape[1] // size_scale, ori_img.shape[0] // size_scale))
     image = np.expand_dims(ori_img, 0)
     img_w, img_h = image.shape[2], image.shape[1]
@@ -74,8 +89,8 @@ while True:
         time.sleep(0.1)
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, x, y, 0, 0)
 
-    #ori_img = cv2.cvtColor(ori_img, cv2.COLOR_BGR2RGB)
-    #cv2.imshow("ori_img", ori_img)
-    #cv2.waitKey(1)
+    ori_img = cv2.cvtColor(ori_img, cv2.COLOR_BGR2RGB)
+    cv2.imshow("ori_img", ori_img)
+    cv2.waitKey(1)
 
     time.sleep(0.1)
