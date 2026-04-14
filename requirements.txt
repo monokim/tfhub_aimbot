@@ -1,0 +1,7 @@
+numpy
+opencv-python
+pyautogui
+pywin32
+PyYAML
+tensorflow
+tensorflow-hub
