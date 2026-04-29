@@ -1,4 +1,4 @@
-from src.aimbot.main import main
+AAimbotfrom src.aimbot.main import main
 
 
 if __name__ == "__main__":
