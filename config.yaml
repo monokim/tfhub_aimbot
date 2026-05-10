@@ -1,26 +1,53 @@
 window:
-  title: "Counter-Strike: Global Offensive"
+  title: "Counter-Strike 2"
   roi:
-    enabled: false
-    width: 640
-    height: 640
+    enabled: true
+    width: 960
+    height: 960
 
 capture:
-  size_scale: 3
+  sizeScale: 1
 
 detector:
-  model_url: "https://tfhub.dev/tensorflow/centernet/resnet50v1_fpn_512x512/1"
-  class_person: 1
-  score_threshold: 0.5
-  filter:
-    ymin_min: 0.5
-    ymax_min: 0.8
+  modelPath: "yolo26n.pt"
+  personClassId: 0
+  scoreThreshold: 0.28
+  imageSize: 768
+  preferGpu: true
+  useHalfPrecision: true
+  minBoxHeightRatio: 0.04
+  excludeBottomRightEnabled: true
+  excludeBottomStartRatio: 0.80
+  excludeRightStartRatio: 0.78
 
 target:
-  head_offset_ratio: 0.45
+  headOffsetRatio: 0.3
+  aimOriginOffsetX: 0
+  aimOriginOffsetY: 8
 
 control:
-  mouse_scale: 1.7
-  move_sleep_sec: 0.05
-  click_hold_sec: 0.1
-  loop_sleep_sec: 0.1
+  mouseScale: 1.35
+  maxStep: 190
+  adaptiveStepNearMaxStep: 20
+  adaptiveStepFarDistancePx: 220.0
+  adaptiveStepCurve: 2.0
+  deadzonePx: 7
+  slowRadiusPx: 115
+  minSlowScale: 0.1
+  moveSleepSec: 0.0
+  clickHoldSec: 0.01
+  loopSleepSec: 0.0
+  autoFire: false
+  boostEnabled: true
+  boostStartPx: 65.0
+  boostMaxScale: 1.8
+
+interface:
+  enabled: true
+  windowName: "Aimbot Detection"
+  maxFps: 75
+  showAimOrigin: false
+
+toggle:
+  virtualKeyCode: 123
+  debounceMs: 180

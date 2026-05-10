@@ -1,1 +1,0 @@
-"""Aimbot package (refactor scaffold)."""

@@ -1,7 +1,7 @@
 numpy
 opencv-python
-pyautogui
+mss
 pywin32
 PyYAML
-tensorflow
-tensorflow-hub
+ultralytics
+torch

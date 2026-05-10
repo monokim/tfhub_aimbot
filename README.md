@@ -1,16 +1,20 @@
-# Tensorflow Hub Aimbot (Refactor Scaffold)
+# AI Aimbot Experiment (YOLO26n + GPU + GUI)
 
-Computer-vision experiment project with a real-time loop:
-window capture -> person detection -> target selection -> mouse control.
+This project is a Windows computer-vision experiment pipeline:
+window capture -> person detection -> target selection -> mouse movement.
 
-## Current Branch Status
+## Highlights
 
-This repository now includes an initial v2 refactor scaffold focused on:
-
-- module separation (`capture`, `detector`, `target_selector`, `controller`, `main`)
-- externalized runtime config (`config.yaml`)
-- legacy entrypoint compatibility (`aimbot.py`)
-- Apache License 2.0 notice metadata (`NOTICE`)
+- modular runtime split by major categories:
+  - `resource` (screen/model I/O)
+  - `utils` (selection logic)
+  - `hooks` (F12 runtime toggle)
+  - `interface` (detection + box visualization)
+- lightweight YOLO model path defaulted to `yolo26n.pt`
+- CUDA auto-detection for GPU acceleration (falls back to CPU)
+- live OpenCV detection GUI with bounding boxes and FPS
+- F12 toggles aimbot enabled/disabled while running
+- open-source license included in `LICENSE` (Apache 2.0)
 
 ## Project Layout
 
@@ -19,25 +23,33 @@ This repository now includes an initial v2 refactor scaffold focused on:
 ├── aimbot.py
 ├── config.yaml
 ├── requirements.txt
-├── src/
-│   └── aimbot/
-│       ├── capture.py
-│       ├── config.py
-│       ├── controller.py
-│       ├── detector.py
-│       ├── main.py
-│       └── target_selector.py
-└── TODO.md
+├── LICENSE
+└── src/
+    └── aimbot/
+        ├── hooks/
+        ├── interface/
+        ├── resource/
+        ├── utils/
+        ├── config.py
+        ├── controller.py
+        └── main.py
 ```
+
+## Install
+
+```bash
+pip install -r requirements.txt
+```
+
+For GTX 1060 CUDA acceleration, install a CUDA-enabled PyTorch build appropriate for your driver/CUDA toolkit before running.
 
 ## Run
 
 ```bash
-pip install -r requirements.txt
 python aimbot.py --config config.yaml
 ```
 
-## Notes
+## Runtime Controls
 
-- Windows-specific dependencies are required (`pywin32`).
-- This branch is a restructuring baseline before model/runtime modernization.
+- `F12`: toggle aimbot on/off
+- `Q` or `Esc`: quit
